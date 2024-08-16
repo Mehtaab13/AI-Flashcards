@@ -21,10 +21,12 @@ export default function Home() {
             Flashcards
           </Typography>
           <SignedOut>
-            <Button color = "inherit">
+            <Button color = "inherit" href="/sign-in">
+              {' '}
               Login
             </Button>
-            <Button color = "inherit">
+            <Button color = "inherit" href="/sign-up">
+              {' '}
               Sign Up
             </Button>
           </SignedOut>
