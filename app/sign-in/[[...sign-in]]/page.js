@@ -4,7 +4,7 @@ import Link from "next/link";
 
 export default function SignUpPage() {
     return (
-        <Container maxWidth="sm">
+        <Container maxWidth="100vw">
             <AppBar
                 position="static"
                 sx={{backgroundColor: "#3f51b5"}}
@@ -19,13 +19,13 @@ export default function SignUpPage() {
                         Flashcards
                     </Typography>
                     <Button color = "inherit">
-                        <Link href="/signup" passHref>
-                            Sign Up
+                        <Link href="/sign-in" passHref>
+                            Login
                         </Link>
                     </Button>
                     <Button color = "inherit">
-                        <Link href="/login" passHref>
-                            Login
+                        <Link href="/sign-up" passHref>
+                            Sign Up
                         </Link>
                     </Button>
                 </Toolbar>
