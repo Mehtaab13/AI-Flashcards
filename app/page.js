@@ -1,3 +1,4 @@
+'use client'
 import Image from "next/image";
 import getStripe from "@/utils/get-stripe";
 import {SignedIn, SignedOut, UserButton} from '@clerk/nextjs'
@@ -5,6 +6,31 @@ import { AppBar, Box, Button, Container, Grid, Toolbar, Typography } from "@mui/
 import Head from "next/head";
 
 export default function Home() {
+
+  const handleSubmit = async () => {
+    const checkoutSession = await fetch('/api/checkout_session', {
+      method: 'POSt',
+      headers: {
+        origin: 'http://localhost:3000'
+      }
+    })
+
+    const checkoutSessionJson = await checkoutSession.json()
+
+    if (checkoutSession.statusCode ===500){
+      console.error(checkoutSession.message)
+      return
+    }
+
+    const stripe = await getStripe()
+    const {error} = await stripe.redirectToCheckout({
+      sessionId: checkoutSessionJson.id
+    })
+
+    if (error){
+      console.warn(error.message)
+    }
+  }
   return (
     <Container maxWidth="100vw">
       <Head>
@@ -50,7 +76,7 @@ export default function Home() {
           The easiest way to make flashcards from your text
         </Typography>
         <Button 
-          variants = "contained"
+          variant = "contained"
           color = "primary"
           sx={{mt: 2}}
         >
@@ -65,31 +91,55 @@ export default function Home() {
         </Typography>
         <Grid container spacing={4}>
           <Grid item xs={12} md={4}>
-            <Typography variant="h6" gutterBottom>
-              Easy Text Input
-            </Typography>
-            <Typography>
-              {' '}
-              Simply input your text and let our software do the rest. Creating flashcards has never been easier.
-            </Typography>
+            <Box 
+              sx={{
+                p: 3,
+                border: '1px solid',
+                borderColor: 'grey.300',
+                borderRadius: 2,
+              }}
+            >
+              <Typography variant="h5" gutterBottom>
+                Easy Text Input
+              </Typography>
+              <Typography variant="h6" gutterBottom>
+                Simply input your text and let our software do the rest. Creating flashcards has never been easier.
+              </Typography>
+            </Box>
           </Grid>
           <Grid item xs={12} md={4}>
-            <Typography variant="h6" gutterBottom>
-              Smart Flashcards
-            </Typography>
-            <Typography>
-              {' '}
-              Our AI intelligently breaks down your text into concise flashcards, perfect for studying.
-            </Typography>
+            <Box 
+              sx={{
+                p: 3,
+                border: '1px solid',
+                borderColor: 'grey.300',
+                borderRadius: 2,
+              }}
+            >
+              <Typography variant="h5" gutterBottom>
+                Smart Flashcards
+              </Typography>
+              <Typography variant="h6" gutterBottom>
+                Our AI intelligently breaks down your text into concise flashcards, perfect for studying.
+              </Typography>
+            </Box>
           </Grid>
           <Grid item xs={12} md={4}>
-            <Typography variant="h6" gutterBottom>
-              Accessible Anywhere
-            </Typography>
-            <Typography>
-              {' '}
-              Access your flashcards from any device, at any time. Study on the go with ease.
-            </Typography>
+            <Box 
+              sx={{
+                p: 3,
+                border: '1px solid',
+                borderColor: 'grey.300',
+                borderRadius: 2,
+              }}
+            >
+              <Typography variant="h5" gutterBottom>
+                Accessible Anywhere
+              </Typography>
+              <Typography variant="h6" gutterBottom>
+                Access your flashcards from any device, at any time. Study on the go with ease.
+              </Typography>
+            </Box>
           </Grid>
         </Grid>
       </Box>
@@ -151,19 +201,11 @@ export default function Home() {
                 variant = "contained"
                 color = "primary"
                 sx = {{mt: 2}}
+                onClick={handleSubmit}
               >
                 Choose Pro
               </Button>
             </Box>
-          </Grid>
-          <Grid item xs={12} md={4}>
-            <Typography variant="h6">
-              Accessible Anywhere
-            </Typography>
-            <Typography>
-              {' '}
-              Access your flashcards from any device, at any time. Study on the go with ease.
-            </Typography>
           </Grid>
         </Grid>
       </Box>
