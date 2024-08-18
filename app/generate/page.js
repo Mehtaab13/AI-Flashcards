@@ -6,6 +6,7 @@ import { Container, Box, Typography, Paper, TextField, Button, Grid, Card, CardA
 import { doc, collection, setDoc, getDoc, writeBatch } from "firebase/firestore";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import Navbar from "../components/Navbar";
 
 export default function Generate() {
     const { isLoaded, isSignedIn, user } = useUser();
@@ -74,6 +75,7 @@ export default function Generate() {
 
     return (
         <Container maxWidth="false" sx={{ backgroundColor: "#1e1e1e", minHeight: "100vh", color: "#c5c6c7", display: "flex", flexDirection: "column", padding: "0" }}>
+            <Navbar />
             <Box sx={{ mt: 4, mb: 6, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 <Typography variant="h4" sx={{ fontFamily: "monospace", color: "#61dafb", textAlign: 'center' }}>
                     Generate Flashcards
