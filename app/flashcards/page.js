@@ -5,6 +5,7 @@ import { collection, doc, getDoc, setDoc } from 'firebase/firestore'
 import { db } from '@/firebase'
 import { useRouter } from 'next/navigation'
 import { Container, Grid, Card, CardActionArea, CardContent, Typography } from '@mui/material'
+import Navbar from "../components/Navbar";
 
 export default function Flashcards() {
     const { isLoaded, isSignedIn, user } = useUser()
@@ -35,8 +36,9 @@ export default function Flashcards() {
     }
 
     return (
-        <Container maxWidth="100vw" sx={{paddingBottom: 5, paddingTop: 2, backgroundColor: "#1e1e1e", minHeight: "100vh", color: "#c5c6c7" }}>
-            <Grid container spacing={3} sx={{ mt: 4 }}>
+        <Container maxWidth="100vw" sx={{ backgroundColor: "#1e1e1e", minHeight: "100vh", color: "#c5c6c7" }}>
+            <Navbar />
+            <Grid container spacing={3} sx={{ mt: 4, paddingBottom: 5, paddingTop: 2 }}>
                 {flashcards.map((flashcard, index) => (
                     <Grid item xs={12} sm={6} md={4} key={flashcard.id}>
                         <Card sx={{ backgroundColor: "#282c34", color: "#61dafb", boxShadow: "0 4px 8px 0 rgba(0,0,0,0.2)" }}>

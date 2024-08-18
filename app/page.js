@@ -6,6 +6,7 @@ import { AppBar, Box, Button, Container, Grid, Toolbar, Typography } from "@mui/
 import Head from "next/head";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import Navbar from "./components/Navbar";
 
 export default function Home() {
   const router = useRouter();
@@ -42,30 +43,13 @@ export default function Home() {
   };
 
   return (
-    <Container maxWidth="xl" sx={{ backgroundColor: "#1e1e1e", minHeight: "100vh", color: "#c5c6c7", padding: "0", display: "flex", flexDirection: "column" }}>
+    <Container maxWidth="100%" sx={{ backgroundColor: "#1e1e1e", minHeight: "100vh", color: "#c5c6c7", padding: "0", display: "flex", flexDirection: "column" }}>
       <Head>
         <title>Flashcards</title>
         <meta name="description" content="Create flashcards from your text" />
       </Head>
 
-      <AppBar position="static" sx={{ backgroundColor: "#282c34" }}>
-        <Toolbar>
-          <Typography variant="h6" sx={{ flexGrow: 1, fontFamily: "monospace" }}>
-            Flashcards
-          </Typography>
-          <SignedOut>
-            <Button color="inherit" href="/sign-in" sx={{ color: "#61dafb" }}>
-              Login
-            </Button>
-            <Button color="inherit" href="/sign-up" sx={{ color: "#61dafb" }}>
-              Sign Up
-            </Button>
-          </SignedOut>
-          <SignedIn>
-            <UserButton />
-          </SignedIn>
-        </Toolbar>
-      </AppBar>
+      <Navbar />
 
       <Box
         sx={{
@@ -104,14 +88,18 @@ export default function Home() {
                 borderRadius: 2,
                 backgroundColor: "#282c34",
                 color: "#c5c6c7",
-                textAlign: 'left'
+                textAlign: 'left',
+                height: '100%', // Ensures all boxes are the same height
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between' // Ensures content is spaced evenly
               }}
             >
               <Typography variant="h5" gutterBottom sx={{ fontFamily: "monospace", fontSize: { xs: "1.25rem", md: "1.5rem" } }}>
-                Easy Text Input
+                <strong>Easy Text Input</strong>
               </Typography>
               <Typography variant="h6" gutterBottom sx={{ fontFamily: "monospace", fontSize: { xs: "1rem", md: "1.25rem" } }}>
-                Simply input your text and let our software do the rest. Creating flashcards has never been easier.
+                Simply input your text and let our software do the rest. Creating flashcards can't be easier.
               </Typography>
             </Box>
           </Grid>
@@ -124,11 +112,15 @@ export default function Home() {
                 borderRadius: 2,
                 backgroundColor: "#282c34",
                 color: "#c5c6c7",
-                textAlign: 'left'
+                textAlign: 'left',
+                height: '100%', // Ensures all boxes are the same height
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between' // Ensures content is spaced evenly
               }}
             >
               <Typography variant="h5" gutterBottom sx={{ fontFamily: "monospace", fontSize: { xs: "1.25rem", md: "1.5rem" } }}>
-                Smart Flashcards
+                <strong>Smart Flashcards</strong>
               </Typography>
               <Typography variant="h6" gutterBottom sx={{ fontFamily: "monospace", fontSize: { xs: "1rem", md: "1.25rem" } }}>
                 Our AI intelligently breaks down your text into concise flashcards, perfect for studying.
@@ -138,17 +130,21 @@ export default function Home() {
           <Grid item xs={12} md={4}>
             <Box
               sx={{
-                p: 5,
+                p: 3,
                 border: '1px solid',
                 borderColor: '#61dafb',
                 borderRadius: 2,
                 backgroundColor: "#282c34",
                 color: "#c5c6c7",
-                textAlign: 'left'
+                textAlign: 'left',
+                height: '100%', // Ensures all boxes are the same height
+                display: 'flex',
+                flexDirection: 'column',
+                justifyContent: 'space-between' // Ensures content is spaced evenly
               }}
             >
               <Typography variant="h5" gutterBottom sx={{ fontFamily: "monospace", fontSize: { xs: "1.25rem", md: "1.5rem" } }}>
-                Accessible Anywhere
+                <strong>Accessible Anywhere</strong>
               </Typography>
               <Typography variant="h6" gutterBottom sx={{ fontFamily: "monospace", fontSize: { xs: "1rem", md: "1.25rem" } }}>
                 Access your flashcards from any device, at any time. Study on the go with ease.  
@@ -208,7 +204,7 @@ export default function Home() {
               <Typography variant="h5" gutterBottom sx={{ fontFamily: "monospace", fontSize: { xs: "1.25rem", md: "1.5rem" } }}>
                 Pro
               </Typography>
-              <Typography variant="h6" gutterBottom sx={{ fontFamily: "monospace", fontSize: { xs: "1rem", md: "1.25rem" } }}>
+              <Typography variant="h6" gutterBottom sx={{ p:2, fontFamily: "monospace", fontSize: { xs: "1rem", md: "1.25rem" } }}>
                 $10 / month
               </Typography>
               <Typography sx={{ fontFamily: "monospace", fontSize: { xs: "0.875rem", md: "1rem" } }}>
@@ -232,3 +228,4 @@ export default function Home() {
     </Container>
   );
 }
+

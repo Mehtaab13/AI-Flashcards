@@ -6,6 +6,7 @@ import { collection, doc, getDocs } from "firebase/firestore";
 import { db } from "@/firebase";
 import { useSearchParams } from "next/navigation";
 import { Container, Box, Typography, Card, CardActionArea, CardContent, Grid } from "@mui/material";
+import Navbar from "../components/Navbar";
 
 export default function Flashcard() {
     const { isLoaded, isSignedIn, user } = useUser();
@@ -43,6 +44,7 @@ export default function Flashcard() {
 
     return (
         <Container maxWidth="false" sx={{backgroundColor: "#1e1e1e", minHeight: "100vh", color: "#c5c6c7", display: "flex", flexDirection: "column", padding: "0" }}>
+            <Navbar />
             <Box sx={{ mt: 4, mb: 6, display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
                 <Typography variant="h4" sx={{ fontFamily: "monospace", color: "#61dafb" }}>
                     Flashcard Collection
