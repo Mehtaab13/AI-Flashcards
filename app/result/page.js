@@ -1,8 +1,6 @@
 'use client'
 import { useEffect, useState } from "react"
 import { useRouter } from "next/navigation"
-import getStripe from "@/utils/get-stripe"
-import { useSearchParams } from "next/navigation"
 import { Box, CircularProgress, Container, Typography } from "@mui/material"
 
 const ResultPage = () => {
@@ -36,78 +34,40 @@ const ResultPage = () => {
         fetchCheckoutSession()
     }, [session_id])
 
-    if (loading){
-        return(
-            <Container
-                maxWidth="100vw"
+    if (loading) {
+        return (
+            <Box
                 sx={{
-                    textAlign: 'center',
-                    mt: 4
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                    height: "100vh",
+                    backgroundColor: "#1e1e1e",
                 }}
             >
-                <CircularProgress />
-                <Typography variant="h6">
-                    Loading...
-                </Typography>   
-            </Container>
+                <CircularProgress sx={{ color: "#61dafb" }} />
+            </Box>
         )
     }
 
-    if(error){
-        return(
-            <Container
-                maxWidth="100vw"
-                sx={{
-                    textAlign: 'center',
-                    mt: 4
-                }}
-            >
-                <CircularProgress />
-                <Typography variant="h6">
+    if (error) {
+        return (
+            <Container sx={{ backgroundColor: "#1e1e1e", color: "#c5c6c7", minHeight: "100vh", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
+                <Typography variant="h4" sx={{ fontFamily: "monospace", mb: 4 }}>
                     {error}
-                </Typography>   
+                </Typography>
             </Container>
         )
     }
 
-    return(
-        <Container
-            maxWidth="100vw"
-            sx={{
-                textAlign: 'center',
-                mt: 4
-            }}
-        >
-            {
-                session.payment_status === "paid" ? (
-                    <>
-                        <Typography variant="h6">
-                            Thank you for purchasing
-                        </Typography>
-                        <Box sx={{mt:22}}>
-                            <Typography variant="h6">
-                                Session ID: {session_id}
-                            </Typography>
-                            <Typography variant="body1">
-                                We have recieved your payment. You will recieve an email with the order details shortly.
-                            </Typography>
-                        </Box>
-                    </>
-                ) :(
-                    <>
-                        <Typography variant="h6">
-                                Payment Failed
-                            </Typography>
-                            <Box sx={{mt:22}}>
-                                <Typography variant="h6">
-                                    Session ID: {session_id}
-                                </Typography>
-                                <Typography variant="body1">
-                                    Your payment was not successful. Please try again.
-                                </Typography>
-                            </Box></>
-                )
-            }
+    return (
+        <Container sx={{ backgroundColor: "#1e1e1e", color: "#c5c6c7", minHeight: "100vh", display: "flex", flexDirection: "column", justifyContent: "center", alignItems: "center" }}>
+            <Typography variant="h4" sx={{ fontFamily: "monospace", mb: 4 }}>
+                {session ? 'Payment Successful' : 'Payment Status'}
+            </Typography>
+            <Typography variant="h6" sx={{ fontFamily: "monospace" }}>
+                {session ? `Thank you for your payment, ${session.customer_details.name}` : 'We couldn\'t find the payment session.'}
+            </Typography>
         </Container>
     )
 }
