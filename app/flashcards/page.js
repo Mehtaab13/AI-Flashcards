@@ -35,12 +35,12 @@ export default function Flashcards() {
     }
 
     return (
-        <Container maxWidth="100vw" sx={{ backgroundColor: "#1e1e1e", minHeight: "100vh", color: "#c5c6c7" }}>
+        <Container maxWidth="100vw" sx={{paddingBottom: 5, paddingTop: 2, backgroundColor: "#1e1e1e", minHeight: "100vh", color: "#c5c6c7" }}>
             <Grid container spacing={3} sx={{ mt: 4 }}>
                 {flashcards.map((flashcard, index) => (
-                    <Grid item xs={12} sm={6} md={4} key={index}>
+                    <Grid item xs={12} sm={6} md={4} key={flashcard.id}>
                         <Card sx={{ backgroundColor: "#282c34", color: "#61dafb", boxShadow: "0 4px 8px 0 rgba(0,0,0,0.2)" }}>
-                            <CardActionArea onClick={() => handleCardClick(index)}>
+                            <CardActionArea onClick={() => handleCardClick(flashcard.name)}>
                                 <CardContent>
                                     <Typography gutterBottom variant="h5" component="div" sx={{ fontFamily: "monospace" }}>
                                         {flashcard.name}
